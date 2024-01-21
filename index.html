@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Human activities that affect the atmosphere</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            margin: 30px;
+            background-color: #ffffff;
+            color: #000000;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            background-color: #1e1e1e;
+            padding: 20px;
+            color: #ffffff;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        section {
+            display: none;
+            margin-bottom: 60px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h2 {
+            color: #61dafb;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        ol {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 15px;
+        }
+
+        .quiz-question {
+            margin-bottom: 30px;
+        }
+
+        .quiz-options label {
+            display: block;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .quiz-options label:hover {
+            background-color: #f0f0f0;
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        button {
+            padding: 15px;
+            margin-top: 20px;
+            cursor: pointer;
+            background-color: #61dafb;
+            color: #1e1e1e;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #47a3f3;
+        }
+
+        .result-container {
+            display: none;
+            text-align: center;
+            background-color: #61dafb;
+            color: #1e1e1e;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            margin-top: 30px;
+        }
+
+        .confetti {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .confetti:before,
+        .confetti:after {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f39c12;
+            border-radius: 50%;
+            animation: confettiAnimation 3s ease-in-out infinite;
+        }
+
+        .confetti:before {
+            background-color: #3498db;
+        }
+
+        .confetti:after {
+            background-color: #e74c3c;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes confettiAnimation {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-100vh);
+            }
+        }
+
+        .fade-in-text {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .confetti.show {
+            opacity: 1;
+        }
+
+        .correct-answer,
+        .incorrect-answer {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .correct-answer.show,
+        .incorrect-answer.show {
+            opacity: 1;
+        }
+
+        .check-answer-button {
+            display: block;
+            margin-top: 15px;
+            padding: 15px;
+            cursor: pointer;
+            background-color: #61dafb;
+            color: #1e1e1e;
+            border: none;
+            border-radius: 8px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .check-answer-button:hover {
+            background-color: #47a3f3;
+        }
+
+        /* Additional styles for the persistent score display */
+        .score-container {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #47a3f3;
+            color: #1e1e1e;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+<body>
+    <header class="fade-in-text">
+        <h1>Human activities that affect the atmosphere</h1>
+        <p>Human Actions, Atmospheric Reactions.</p>
+    </header>
+
+    <!-- Persistent Score Display -->
+    <div class="score-container">Score: <span id="score">0</span></div>
+
+    <section id="section1" style="display: block;" class="fade-in-text">
+        
+        <h2>Fossil Fuel Impact</h2>
+        <ol>
+            <li>Burning fossil fuels releases a significant greenhouse gas.</li>
+            <li>It contributes to global warming and climate change.</li>
+            <li>Transportation and industries are major contributors.</li>
+            <li>Transitioning to cleaner energy sources can help mitigate the impact.</li>
+        </ol>
+
+        <div class="quiz-question">
+            <p>What gas is released into the air when fossil fuels are burned?</p>
+            <div class="quiz-options">
+                <label><input type="radio" name="urlQuiz" value="a"> a. Oxygen</label>
+                <label><input type="radio" name="urlQuiz" value="b"> b. Carbon Dioxide</label>
+                <label><input type="radio" name="urlQuiz" value="c"> c. Methane</label>
+                <label><input type="radio" name="urlQuiz" value="d"> d. Nitrogen</label>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button onclick="checkAnswer(1)" class="check-answer-button">Check Answer</button>
+        </div>
+    </section>
+
+    <!-- Section 2 - Industrial Pollution -->
+    <section id="section2">
+        <h2>Industrial Pollution</h2>
+        <ol>
+            <li>Industrial processes release various pollutants.</li>
+            <li>Airborne pollutants can harm human health.</li>
+            <li>Implementing cleaner technologies is crucial.</li>
+            <li>Government regulations play a role in controlling industrial pollution.</li>
+        </ol>
+
+        <div class="quiz-question">
+            <p>How can industries reduce their environmental impact?</p>
+            <div class="quiz-options">
+                <label><input type="radio" name="designQuiz" value="a"> a. Increase pollutant emissions</label>
+                <label><input type="radio" name="designQuiz" value="b"> b. Ignore waste management</label>
+                <label><input type="radio" name="designQuiz" value="c"> c. Use cleaner technologies</label>
+                <label><input type="radio" name="designQuiz" value="d"> d. Promote excessive resource use</label>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button onclick="checkAnswer(2)" class="check-answer-button">Check Answer</button>
+        </div>
+    </section>
+
+    <!-- Section 3 - Agricultural Impact -->
+    <section id="section3">
+        <h2>Agricultural Impact</h2>
+        <ol>
+            <li>Agricultural activities contribute to greenhouse gas emissions.</li>
+            <li>Pesticides and synthetic fertilisers can harm the environment.</li>
+            <li>Deforestation for farming is a concern.</li>
+            <li>Sustainable farming practices can mitigate environmental impact.</li>
+        </ol>
+
+        <div class="quiz-question">
+            <p>Why is sustainable farming important for the environment?</p>
+            <div class="quiz-options">
+                <label><input type="radio" name="contactQuiz" value="a"> a. Increases pollution</label>
+                <label><input type="radio" name="contactQuiz" value="b"> b. Promotes deforestation</label>
+                <label><input type="radio" name="contactQuiz" value="c"> c. Reduces environmental impact</label>
+                <label><input type="radio" name="contactQuiz" value="d"> d. Enhances greenhouse gas emissions</label>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button onclick="checkAnswer(3)" class="check-answer-button">Check Answer</button>
+        </div>
+    </section>
+
+    <!-- Section 4 - Air Quality and Urbanization -->
+    <section id="section4">
+        <h2>Air Quality and Urbanization</h2>
+        <ol>
+            <li>Urban activities contribute to poor air quality.</li>
+            <li>Transportation emissions are a major factor.</li>
+            <li>Cleaner transportation options are necessary.</li>
+            <li>Urban planning can include green spaces to improve air quality.</li>
+        </ol>
+
+        <div class="quiz-question">
+            <p>How can cities improve air quality?</p>
+            <div class="quiz-options">
+                <label><input type="radio" name="paymentQuiz" value="a"> a. Cut down all trees</label>
+                <label><input type="radio" name="paymentQuiz" value="b"> b. Encourage more car use</label>
+                <label><input type="radio" name="paymentQuiz" value="c"> c. Plant more trees and use cleaner energy</label>
+                <label><input type="radio" name="paymentQuiz" value="d"> d. Ignore pollution regulations</label>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button onclick="checkAnswer(4)" class="check-answer-button">Check Answer</button>
+        </div>
+    </section>
+
+    <!-- Section 5 - Deforestation and Land Use Change -->
+    <section id="section5">
+        <h2>Deforestation and Land Use Change</h2>
+        <ol>
+            <li>Deforestation reduces the Earth's capacity to absorb carbon dioxide.</li>
+            <li>Agricultural expansion and infrastructure contribute to deforestation.</li>
+            <li>Reforestation projects can offset carbon emissions.</li>
+            <li>Conservation efforts are essential for preserving natural habitats.</li>
+        </ol>
+
+        <div class="quiz-question">
+            <p>How can individuals contribute to preventing deforestation?</p>
+            <div class="quiz-options">
+                <label><input type="radio" name="socialQuiz" value="a"> a. Use more paper products</label>
+                <label><input type="radio" name="socialQuiz" value="b"> b. Support sustainable logging practices</label>
+                <label><input type="radio" name="socialQuiz" value="c"> c. Plant more trees</label>
+                <label><input type="radio" name="socialQuiz" value="d"> d. Ignore conservation efforts</label>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button onclick="checkAnswer(5)" class="check-answer-button">Check Answer</button>
+        </div>
+    </section>
+
+    <!-- Section 6 - Waste Management and Pollution -->
+    <section id="section6">
+        <h2>Waste Management and Pollution</h2>
+        <ol>
+            <li>Improper waste disposal contributes to air and soil pollution.</li>
+            <li>Recycling and proper waste treatment are essential.</li>
+            <li>Government regulations play a role in waste management.</li>
+            <li>Public awareness promotes responsible consumer choices.</li>
+        </ol>
+
+        <div class="quiz-question">
+            <p>What can happen if waste is not managed properly?</p>
+            <div class="quiz-options">
+                <label><input type="radio" name="challengingQuiz" value="a"> a. Cleaner air</label>
+                <label><input type="radio" name="challengingQuiz" value="b"> b. Air and soil pollution</label>
+                <label><input type="radio" name="challengingQuiz" value="c"> c. Soil fertility</label>
+                <label><input type="radio" name="challengingQuiz" value="d"> d. Increased biodiversity</label>
+            </div>
+        </div>
+
+        <div class="button-container">
+            <button onclick="checkChallengingAnswer()" class="check-answer-button">Check Answer</button>
+        </div>
+    </section>
+
+    <!-- Certificate Generation Section -->
+    <section id="certificateSection">
+        <!-- Certificate generation form -->
+        <h2>Certificate Generator</h2>
+        <form onsubmit="generateCertificate(); return false;">
+            <label for="userName">Name:</label>
+            <input type="text" id="userName" required>
+
+            <label for="certificateDate">Date:</label>
+            <input type="date" id="certificateDate" required>
+
+            <button type="submit">Generate Certificate</button>
+        </form>
+
+        <!-- Certificate template -->
+        <div id="certificateTemplate" class="result-container fade-in-text" style="display: none;">
+            <style>
+                /* Certificate template styles */
+                #certificateTemplate {
+                    background-color: #61dafb;
+                    color: #1e1e1e;
+                    border-radius: 8px;
+                    padding: 20px;
+                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+                    margin-top: 30px;
+                    text-align: center;
+                }
+
+                .certificate-name {
+                    font-size: 24px;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                }
+
+                .certificate-text {
+                    font-size: 18px;
+                    margin-bottom: 15px;
+                }
+
+                .congratulations-text {
+                    font-size: 20px;
+                    font-weight: bold;
+                }
+            </style>
+
+            <h2>Certificate of Achievement</h2>
+            <p class="certificate-text">This is to certify that</p>
+            <p class="certificate-name" id="certificateName"></p>
+            <p class="certificate-text">successfully completed the MCQ Quiz on <span id="certificateDateSpan"></span> and got all questions correct!</p>
+            <p class="congratulations-text">Congratulations!</p>
+        </div>
+    </section>
+
+<div class="result-container fade-in-text" id="resultContainer">
+    <!-- ... (existing code) ... -->
+    <!-- Display correct and incorrect answers with fading animation -->
+    <div id="answerFeedback" class="answer-feedback">
+        <p class="correct-answer">Correct! Well done.</p>
+        <p class="incorrect-answer">Oops! That's not correct.</p>
+    </div>
+
+
+    <div class="confetti"></div>
+
+
+    <script>
+        // JavaScript code goes here
+// JavaScript code goes here
+
+    // JavaScript code goes here
+    let points = 0;
+    let correctAnswersCount = 0;
+    let userAnswers = [];
+
+    function showAnswerFeedback(isCorrect, correctAnswer, userAnswer) {
+        const feedbackElement = document.getElementById('answerFeedback');
+        const correctAnswerElement = feedbackElement.querySelector('.correct-answer');
+        const incorrectAnswerElement = feedbackElement.querySelector('.incorrect-answer');
+
+        if (isCorrect) {
+            correctAnswerElement.classList.add('show');
+            incorrectAnswerElement.classList.remove('show');
+        } else {
+            correctAnswerElement.classList.remove('show');
+            incorrectAnswerElement.classList.add('show');
+            incorrectAnswerElement.innerText = `Wrong Answer! The correct answer is: ${correctAnswer}`;
+        }
+
+        // Store user's answer for later display
+        userAnswers.push(userAnswer);
+    }
+    function checkAnswer(currentSection) {
+    // Assuming correct answers for each section
+    const correctAnswers = [null, "b", "c", "c", "c", "c", "c"]; // Index 0 is not used
+
+    // Check the selected answer in the current section
+    const selectedAnswer = document.querySelector(`#section${currentSection} input:checked`).value;
+
+    // Display correct and incorrect answer feedback with fading animation
+    showAnswerFeedback(selectedAnswer === correctAnswers[currentSection], correctAnswers[currentSection], selectedAnswer);
+
+    // Update points and score immediately
+    if (selectedAnswer === correctAnswers[currentSection]) {
+        points += 3;
+        correctAnswersCount++;
+    }
+
+    // Update score in the top right corner
+    document.getElementById('score').innerText = correctAnswersCount;
+
+    // Hide current section
+    document.getElementById(`section${currentSection}`).style.display = 'none';
+
+    // Show next section or display the final result
+    const nextSection = currentSection + 1;
+    if (nextSection <= 5) {
+        document.getElementById(`section${nextSection}`).style.display = 'block';
+    } else {
+        // Display the final result
+        displayFinalResult();
+        
+    }
+}
+
+{
+    // Display the final result container
+    document.getElementById('resultContainer').style.display = 'block';
+
+    // Display the user's score and answers
+    document.getElementById('congratulationsText').innerText = `You got ${correctAnswersCount} out of 5.`;
+
+    // Determine the appropriate message based on the score
+    let message;
+    if (correctAnswersCount === 5) {
+        message = "Congrats! You got a perfect score in the recap of Human activities that affect the atmosphere. Show this screen to any one of us (Pranav R, Mysha, or Karthik) to redeem your digital certificate.";
+    } else {
+        message = "Congratulations! You have successfully completed this recap of Human activities that affect the atmosphere.";
+    }
+
+    // Display the message
+    document.getElementById('resultMessage').innerText = message;
+
+    // Trigger confetti animation
+    startConfettiAnimation();
+
+    // Display additional message
+    const additionalMessage = document.getElementById('additionalMessage');
+    additionalMessage.innerText = "Show this screen to any one of us (Pranav R, Mysha, or Karthik) to redeem your digital certificate.";
+
+}
+
+
+    function startConfettiAnimation() {
+        // Display confetti and trigger animation
+        const confettiElement = document.querySelector('.confetti');
+        confettiElement.classList.add('show');
+        jsConfetti.addConfetti({ emojis: ['🎉', '👏'], confettiNumber: 100 });
+
+        // Hide confetti after animation
+        setTimeout(() => {
+            confettiElement.classList.remove('show');
+        }, 3000); // Adjust the time based on your preference
+    }
+
+    // ... rest of your code remains unchanged
+
+    // Additional function for challenging questions
+    function checkChallengingAnswer() {
+        // Assuming correct challenging answer
+        const challengingCorrectAnswer = "c";
+
+        // Check the selected answer
+        const selectedAnswer = document.querySelector(`input[name="challengingQuiz"]:checked`).value;
+
+        // Display correct and incorrect answer feedback with fading animation
+        showAnswerFeedback(selectedAnswer === challengingCorrectAnswer, challengingCorrectAnswer);
+
+        // Update points and score immediately
+        if (selectedAnswer === challengingCorrectAnswer) {
+            points += 3;
+            correctAnswersCount++;
+        }
+
+        // Update score in the top right corner
+        document.getElementById('score').innerText = correctAnswersCount;
+
+        // Hide challenging questions section
+        document.getElementById('section6').style.display = 'none';
+    }
+</script>
+
+    <script>
+        // Live-server script goes here
+    </script>
+</body>
+
+</html>
+    
